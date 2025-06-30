@@ -18,7 +18,7 @@ namespace ACWebApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Projects()
         {
             return View();
         }

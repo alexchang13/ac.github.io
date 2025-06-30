@@ -19,4 +19,14 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.custom-logo {
+    height: 40px; /* Matches or is less than navbar height */
+    width: auto;
+    transform: scale(4.0); /* Visually enlarges logo */
+    transform-origin: left center;
+    position: relative;
+    z-index: 1;
 }
