@@ -23,7 +23,7 @@ body {
 }
 
 .custom-logo {
-    height: 40px; /* Matches or is less than navbar height */
+    height: 20px; /* Matches or is less than navbar height */
     width: auto;
     transform: scale(4.0); /* Visually enlarges logo */
     transform-origin: left center;

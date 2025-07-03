@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ACWebApp.Models;
 
 namespace ACWebApp.Data
 {
@@ -9,5 +10,6 @@ namespace ACWebApp.Data
             : base(options)
         {
         }
+        public DbSet<ACWebApp.Models.Idea> Idea { get; set; } = default!;
     }
 }
