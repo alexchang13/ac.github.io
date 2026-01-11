@@ -1,4 +1,4 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const app = document.getElementById("scoreboard-app");
 
     let numPlayers = 4;
@@ -62,6 +62,19 @@
         return totals;
     }
 
+    function updateTotals() {
+        const totals = calculateTotals();
+        const totalRow = tableContainer.querySelector("tbody tr:last-child");
+        if (totalRow) {
+            const cells = totalRow.querySelectorAll("th, td");
+            for (let p = 0; p < numPlayers; p++) {
+                if (cells[p + 1]) {
+                    cells[p + 1].textContent = totals[p];
+                }
+            }
+        }
+    }
+
     function renderTable() {
         tableContainer.innerHTML = "";
         const table = document.createElement("table");
@@ -70,7 +83,7 @@
         const headRow = document.createElement("tr");
 
         headRow.appendChild(createCell("Game #", true));
-        playerNames.length = numPlayers; // make sure the array has the right length
+        playerNames.length = numPlayers;
         for (let p = 0; p < numPlayers; p++) {
             const th = document.createElement("th");
             const input = document.createElement("input");
@@ -96,13 +109,39 @@
             for (let p = 0; p < numPlayers; p++) {
                 const td = document.createElement("td");
                 const input = document.createElement("input");
-                input.type = "number";
+                input.type = "text";
+                input.inputMode = "numeric";
+                input.pattern = "[0-9]*";
                 input.value = scores[g][p] || "";
                 input.className = "form-control text-center";
-                input.addEventListener("input", () => {
-                    scores[g][p] = parseInt(input.value || 0);
-                    renderTable(); // update totals
+
+                // Only allow numeric input while typing
+                input.addEventListener("input", (e) => {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
                 });
+
+                // Update scores and totals only when leaving the cell OR pressing Enter
+                const saveScore = () => {
+                    const value = input.value.trim();
+                    scores[g][p] = value ? parseInt(value) : 0;
+                    input.value = scores[g][p] || "";
+                    updateTotals();
+                };
+
+                input.addEventListener("blur", saveScore);
+
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        saveScore();
+                        // Move to next input
+                        const inputs = Array.from(tbody.querySelectorAll('input[type="text"]'));
+                        const currentIndex = inputs.indexOf(input);
+                        if (currentIndex < inputs.length - 1) {
+                            inputs[currentIndex + 1].focus();
+                        }
+                    }
+                });
+
                 td.appendChild(input);
                 row.appendChild(td);
             }
@@ -196,8 +235,8 @@
     let timerCanceled = false;
 
     startBtn.addEventListener("click", () => {
-        timerCanceled = false; // reset flag when timer starts
-        clearInterval(countdownInterval); // clear if already running
+        timerCanceled = false;
+        clearInterval(countdownInterval);
         let timeLeft = 60;
 
         countdownInterval = setInterval(() => {
@@ -210,19 +249,14 @@
             if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
                 timerDisplay.textContent = "00:00";
-
-                if (!timerCanceled) {
-                    const alarm = new Audio('/sounds/alarm.mp3'); // save a sound file in wwwroot/sounds/
-                    alarm.play();
-                }
             }
         }, 1000);
     });
 
     resetTimerBtn.addEventListener("click", () => {
         timerCanceled = true;
-        clearInterval(countdownInterval); // Stop the countdown
-        timerDisplay.textContent = "01:00"; // Reset display
+        clearInterval(countdownInterval);
+        timerDisplay.textContent = "01:00";
     });
 
     timerSection.appendChild(timerDisplay);
@@ -230,19 +264,20 @@
     timerSection.appendChild(resetTimerBtn);
     app.appendChild(timerSection);
 
-
     function createCalcInput() {
         const input = document.createElement("input");
         input.type = "number";
         input.value = 0;
         input.className = "form-control d-inline-block text-center mx-1";
         input.style.width = "70px";
-        input.addEventListener("input", () => {
+
+        input.addEventListener("blur", () => {
             resultSpan.textContent =
                 parseInt(num1.input.value || 0) +
                 parseInt(num2.input.value || 0) +
                 parseInt(num3.input.value || 0);
         });
+
         return { input };
     }
 });
