@@ -111,13 +111,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 const input = document.createElement("input");
                 input.type = "text";
                 input.inputMode = "numeric";
-                input.pattern = "[0-9]*";
                 input.value = scores[g][p] || "";
                 input.className = "form-control text-center";
 
-                // Only allow numeric input while typing
+                // Allow numeric input including negative numbers
                 input.addEventListener("input", (e) => {
-                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                    // Allow numbers, minus sign, but only one minus at the start
+                    let value = e.target.value;
+                    // Remove any character that's not a digit or minus
+                    value = value.replace(/[^0-9-]/g, '');
+                    // Ensure minus only appears at the start
+                    if (value.indexOf('-') > 0) {
+                        value = value.replace(/-/g, '');
+                    }
+                    // Ensure only one minus sign
+                    const minusCount = (value.match(/-/g) || []).length;
+                    if (minusCount > 1) {
+                        value = '-' + value.replace(/-/g, '');
+                    }
+                    e.target.value = value;
                 });
 
                 // Update scores and totals only when leaving the cell OR pressing Enter
