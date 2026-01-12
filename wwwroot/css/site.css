@@ -30,3 +30,11 @@ body {
     position: relative;
     z-index: 1;
 }
+
+.navbar-nav .nav-link:hover {
+    color: #ff6600 !important;
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.3s ease;
+}
