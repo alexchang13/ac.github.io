@@ -16,7 +16,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 // Detect which database provider to use based on connection string
-if (connectionString.Contains("Host=") || connectionString.Contains("Server=") && connectionString.Contains("Database=") && !connectionString.Contains("Data Source="))
+if (connectionString.Contains("Host=") || 
+    (connectionString.Contains("Server=") && connectionString.Contains("Port=") && !connectionString.Contains("Trusted_Connection") && !connectionString.Contains("Integrated Security")))
 {
     // PostgreSQL
     builder.Services.AddDbContext<ApplicationDbContext>(options =>

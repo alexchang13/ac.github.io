@@ -1,39 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Projects";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="container-xxl my-5 py-5">
+    <h1>@ViewData["Title"]</h1>
 
-<p>Here are some of the Projects I am building to help with expanding my programming concepts and building my knowledge base.</p>
+    <p>Here are some of the Projects I am building to help with expanding my programming concepts and building my knowledge base.</p>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <img src="~/images/rummikub.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Rummikub Scoreboard</h5>
-                    <p class="card-text">This scoreboard is designed for upto 4 players who want to keep track of their Rummikub Scoring</p>
-                    <a class="btn btn-primary" asp-controller="Rummi" asp-action="Index">Open</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/images/rummikub.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rummikub Scoreboard</h5>
+                        <p class="card-text">This scoreboard is designed for upto 4 players who want to keep track of their Rummikub Scoring</p>
+                        <a class="btn btn-primary" asp-controller="Rummi" asp-action="Index">Open</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <img src="~/images/idea.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Idea Storage</h5>
-                    <p class="card-text">This page allows me to store all my ideas for various projects along with pros and cons</p>                    
-                    <a class="btn btn-primary" asp-controller="Ideas" asp-action="Index">Open</a>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/images/idea.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Idea Storage</h5>
+                        <p class="card-text">This page allows me to store all my ideas for various projects along with pros and cons</p>                    
+                        <a class="btn btn-primary" asp-controller="Ideas" asp-action="Index">Open</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <img src="~/images/placeholder.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Open</a>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/images/placeholder.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Open</a>
+                    </div>
                 </div>
             </div>
         </div>
