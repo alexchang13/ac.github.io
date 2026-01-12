@@ -38,3 +38,8 @@ body {
 .navbar-nav .nav-link {
     transition: color 0.3s ease;
 }
+
+.btn-dark:hover {
+    background-color: #ff6600 !important;
+    border-color: #ff6600 !important;
+}
